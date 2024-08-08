@@ -76,13 +76,13 @@ const invoices = [
   {
     customer_id: customers[5].id,
     amount: 34577,
-    status: 'cancel',
+    status: 'canceled',
     date: '2023-08-05',
   },
   {
     customer_id: customers[2].id,
     amount: 54246,
-    status: 'cancel',
+    status: 'canceled',
     date: '2023-07-16',
   },
   {
