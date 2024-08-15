@@ -5,6 +5,7 @@ import {
   CustomersTableType,
   FormattedCustomersTable,
 } from '@/app/lib/definitions';
+import clsx from 'clsx';
 
 export default async function CustomersTable({
   customers,
@@ -49,11 +50,11 @@ export default async function CustomersTable({
                     <div className="flex w-full items-center justify-between border-b py-5">
                       <div className="flex w-1/2 flex-col">
                         <p className="text-xs">Pending</p>
-                        <p className="font-medium">{customer.total_pending}</p>
+                        <p className="font-medium">{customer.total_pending_text}</p>
                       </div>
                       <div className="flex w-1/2 flex-col">
                         <p className="text-xs">Paid</p>
-                        <p className="font-medium">{customer.total_paid}</p>
+                        <p className="font-medium">{customer.total_paid_text}</p>
                       </div>
                     </div>
                     <div className="pt-4 text-sm">
@@ -105,10 +106,22 @@ export default async function CustomersTable({
                         {customer.total_invoices}
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
-                        {customer.total_pending}
+                        <span className={clsx(
+                          'inline-flex items-center rounded-full px-2 py-1 text-xs',
+                          {
+                            'bg-gray-100 text-gray-500': customer.total_pending == 0,
+                            'bg-orange-500 text-white': customer.total_pending > 0
+                          },
+                        )}>{customer.total_pending_text}</span>
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
-                        {customer.total_paid}
+                        <span className={clsx(
+                          'inline-flex items-center rounded-full px-2 py-1 text-xs ',
+                          {
+                            'bg-gray-100 text-gray-500': customer.total_paid == 0,
+                            'bg-green-500 text-white': customer.total_paid > 0
+                          },
+                        )}>{customer.total_paid_text}</span>
                       </td>
                     </tr>
                   ))}
